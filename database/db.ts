@@ -1,9 +1,18 @@
+import {MongoClient} from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-async function connectDB() {
-    // const MONGO_URI = process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TEST : process.env.MONGO_URI;
-    // if{!MONGO_URI} {
+let client: MongoClient;
 
-    // }
+export async function connectDB() {
+    const uri = process.env.MONGO_URI;
+    const dbName = process.env.MONGO_DB_NAME;
+
+    client = new MongoClient(uri!);
+    await client.connect();
+
+    const db = dbName ? client.db(dbName) : client.db();
+    console.log(" Connected to MongoDB");
+
+    return db;
 }
