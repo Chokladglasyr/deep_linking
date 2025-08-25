@@ -3,7 +3,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { createUser } from "../controllers/userController";
 import path from "path";
-import { Tracking } from "../models/tracking";
+import { trackUser } from "../controllers/tracking";
 
 dotenv.config();
 
@@ -20,14 +20,6 @@ app.get("/", (req: Request, res: Response) => {
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.post("/signup", createUser);
-
-export const trackUser = async (req: Request): Promise<void> => {
-  try {
-    await Tracking.create({ ip: req.ip, influencer: "sara" });
-  } catch (error) {
-    console.error(`Error when saving ip-adress: ${error}`);
-  }
-};
 
 app.listen(port, async () => {
   await connectDB();
