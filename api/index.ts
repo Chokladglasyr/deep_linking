@@ -3,50 +3,35 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { createUser } from "../controllers/userController";
 import path from "path";
+import { Tracking } from "../models/tracking";
 
 dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3000;
+
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "..", "public")));
-
 app.get("/", (req: Request, res: Response) => {
+  trackUser(req);
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
 
-app.post("/signup", createUser);
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, async () => {
-  await connectDB();
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.post("/signup", createUser);
 
-app.use(express.json());
-const port = process.env.PORT || 3000;
-
-app.get("/", (req: Request, res: Response) => {
-  const ip = getClientIp(req);
-  res.json({ ip });
-});
+export const trackUser = async (req: Request): Promise<void> => {
+  try {
+    await Tracking.create({ ip: req.ip, influencer: "sara" });
+  } catch (error) {
+    console.error(`Error when saving ip-adress: ${error}`);
+  }
+};
 
 app.listen(port, async () => {
   await connectDB();
   console.log(`Server is running at http://localhost:${port}`);
 });
-
-const getClientIp = (req: Request): string => {
-  return (
-    req.headers["cf-connecting-ip"]?.toString() ||
-    req.headers["x-real-ip"]?.toString() ||
-    req.headers["x-forwarded-for"]?.toString().split(",")[0].trim() || // take first forwarded IP
-    req.socket.remoteAddress ||
-    ""
-  );
-};
 
 app.post("/signup", createUser);
