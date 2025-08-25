@@ -3,6 +3,7 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongodb": "^6.18.0",
+    "mongoose": "^8.18.0",
     "node": "^24.6.0",
     "nodemon": "^3.1.10",
     "types": "^0.1.1"
@@ -13,5 +14,24 @@
     "@types/node": "^24.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
-  }
+  },
+  "name": "deep_linking",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev" : "nodemon ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chokladglasyr/deep_linking.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chokladglasyr/deep_linking/issues"
+  },
+  "homepage": "https://github.com/Chokladglasyr/deep_linking#readme",
+  "description": ""
 }
