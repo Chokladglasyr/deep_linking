@@ -32,7 +32,7 @@ _creates user account_
     + ```_id:```: id for user  
     + ```name```: name for user  
     + ```email```: email for user  
-    + ```refId```: id for influencer/campaign
+    + ```influencer```: id for influencer/campaign
     + ```source```: source used
 
 #### Example:
@@ -43,7 +43,7 @@ _creates user account_
             "_id": "689b0a279e34a7d4303d5223",
             "name": "Ida",
             "email": "ida@ida.com",
-            "refId": "sara",
+            "influencer": "sara",
             "source": "instagram"
         }
 }
