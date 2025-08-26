@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use(cors({
-    origin: ["deep-linking-psi.vercel.app", `http://localhost:${port}`],
+    origin: ["https://deep-linking-psi.vercel.app", `http://localhost:${port}`],
     credentials: true
 }))
 
