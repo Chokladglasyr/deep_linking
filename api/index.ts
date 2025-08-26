@@ -13,6 +13,8 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
+  // const clientIp = req.ip || req.socket.remoteAddress;
+  // console.log("Visitor IP:", clientIp);
   trackUser(req);
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });
