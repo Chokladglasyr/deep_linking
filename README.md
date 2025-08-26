@@ -19,6 +19,9 @@ https://deep-linking-psi.vercel.app/
 GET '/'   
 _returns registration form_
 
+GET '/?influencer=:name&source=:source'
+_saves ip, influencer and source to dB_
+
 POST '/signup'  
 _creates user account_
 
