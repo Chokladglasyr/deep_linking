@@ -10,6 +10,7 @@ account. The solution should also be able to preserve and reuse this information
 We will fetch the users ip, save it with an ID for the influencer/campaign/source. When a user goes to the website in a different window, it will fetch the ip again, try to match it to an existing. If a match is found it will connect the fetched ID to the users account. This way the organisation can track which influencer/campaign/source they found the site through.
 
 ## BACKEND
+Express.js, Node.js
 
 ### Deployed URL:
 https://deep-linking-psi.vercel.app/
