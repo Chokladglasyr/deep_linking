@@ -20,11 +20,19 @@ export const createUser = async (req: Request, res: Response) => {
         }
         const newUser = new User ({name, email, password, refId})
         await newUser.save();
-        res.status(201).json({message: `New user registered: ${newUser}`})
+        res.status(201).json({
+            message: "New user registered",
+            user: {
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                refId: newUser.refId,
+                source: newUser.source
+            }
+        })
 
-    } catch(err: unknown) {
+    } catch(err) {
         if(err instanceof Error) {
-
             console.error("Failed to register: ", err)
         }
     }

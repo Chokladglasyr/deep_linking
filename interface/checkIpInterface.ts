@@ -10,4 +10,4 @@ const clientIpSchema: Schema = new Schema ({
     refId: {type: String},
 
 })
-export const ClientIp = mongoose.model<IClientIp>("User", clientIpSchema)
+export const ClientIp = mongoose.model<IClientIp>("ClientIp", clientIpSchema)
