@@ -12,6 +12,8 @@ We will fetch the users ip, save it with an ID for the influencer/campaign/sourc
 ## BACKEND
 Express.js, Node.js
 
+ <img src="./public/Screenshot 2025-08-26 171003.png" width="400px" height="200px">
+
 ### Deployed URL:
 https://deep-linking-psi.vercel.app/
 
