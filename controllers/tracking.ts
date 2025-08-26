@@ -4,9 +4,16 @@ import { Tracking } from "../models/tracking";
 export const trackUser = async (req: Request) => {
   try {
     const influencer = (req.query.influencer as string) || "direct";
+    const source = (req.query.source as string[]) || "direct";
     const ip = req.ip;
-    const source = req.headers.referer || "direct";
-    console.log("Tracking visit from IP:", req.ip, "Influencer:", influencer);
+    console.log(
+      "Tracking visit from IP:",
+      req.ip,
+      "Influencer:",
+      influencer,
+      "Source:",
+      source
+    );
 
     let existingTracking = await Tracking.findOne({ ip });
 
@@ -31,7 +38,3 @@ export const trackUser = async (req: Request) => {
     console.error(`Error when saving ip-address: ${error}`);
   }
 };
-// await Tracking.create({
-//   ip: req.ip,
-//   influencer: influencer,
-//   source: req.headers.referer || "direct",
