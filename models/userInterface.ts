@@ -13,6 +13,7 @@ const userSchema: Schema = new Schema ({
     email: {type: String, required: true},
     password: {type: String},
     influencer: {type: String},
+    source: {type: String}
 
 })
 export const User = mongoose.model<IUser>("User", userSchema)
