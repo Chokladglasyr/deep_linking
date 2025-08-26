@@ -15,21 +15,31 @@ export const createUser = async (req: Request, res: Response) => {
       await newTracking.save();
     }
 
-    const { name, email, password } = req.body;
-    const existsUser = await User.findOne({ email: email });
-    if (existsUser) {
-      res.status(400).json({ message: "User exists" });
-      return;
+        const { name, email, password } = req.body
+        const existsUser = await User.findOne({email: email});
+        if(existsUser) {
+            res.status(400).json({message: "User exists"});
+            return;
+        }
+        const newUser = new User ({name, email, password, refId})
+        await newUser.save();
+        res.status(201).json({
+            message: "New user registered",
+            user: {
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                refId: newUser.refId,
+                source: newUser.source
+            }
+        })
+
+    } catch(err) {
+        if(err instanceof Error) {
+            console.error("Failed to register: ", err)
+        }
     }
-    const newUser = new User({ name, email, password, refId });
-    await newUser.save();
-    res.status(201).json({ message: `New user registered: ${newUser}` });
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error("Failed to register: ", err);
-    }
-  }
-};
+}
 
 export const storeNewIP = async (req: Request, res: Response) => {
   try {
