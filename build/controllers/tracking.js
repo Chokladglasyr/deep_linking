@@ -8,25 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-function connectBD() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const URL = process.env.MONGO_URI || "";
-            yield mongoose_1.default.connect(URL);
-            console.log(`Database Connected to MongoDB ${URL}`);
-        }
-        catch (error) {
-            if (error instanceof Error) {
-                console.error("Error connecting to MongoDB:", error.message);
-            }
-        }
-    });
-}
-exports.default = connectBD;
+exports.trackUser = void 0;
+const tracking_1 = require("../models/tracking");
+const trackUser = (req) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield tracking_1.Tracking.create({ ip: req.ip, influencer: "sara" });
+        //kolla ifall redan existerar
+    }
+    catch (error) {
+        console.error(`Error when saving ip-adress: ${error}`);
+    }
+});
+exports.trackUser = trackUser;
