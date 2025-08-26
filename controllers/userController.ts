@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/userInterface";
-import { Tracking } from "../models/checkIpInterface";
+import { Tracking } from "../models/tracking";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
