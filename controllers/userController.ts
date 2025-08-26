@@ -4,8 +4,8 @@ import { Tracking } from "../models/tracking";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    console.log("hej")
     const clientIp = req.ip;
+    console.log(clientIp)
     const existsTracking = await Tracking.findOne({ ip: clientIp });
     if (!existsTracking) {
       const newTracking = new Tracking({
