@@ -10,15 +10,50 @@
     </style>
 </head>
 <body>
-    <form action="">
-        <input type="text" placeholder="Name:">
-        <input type="text" placeholder="Email:">
-        <input type="password" placeholder="Password">
-        <button type="submit">Submit</button>
+    <form action="" id="signupForm">
+        <input type="text" id="name" placeholder="Name:">
+        <input type="text" id="email" placeholder="Email:">
+        <input type="password" id="password" placeholder="Password">
+        <button id="submit" type="submit">Submit</button>
     </form>
-<script>
-    
-</script>
+<!-- <script src="../build/"></script> -->
+ <script>
+        const validateForm = document.getElementById("signupForm")
+    const form = {
+        name: document.querySelector('#name'),
+        email: document.querySelector('#email'),
+        password: document.querySelector('#password')
+    }
+    const submit = document.getElementById("submit")
+    submit?.addEventListener('click', registerUser)
+
+    async function registerUser(e) {
+        try {
+            console.log("hej")
+            if(!validateForm.checkValidity()){
+                console.log("fel")
+                return;
+            }
+            e.preventDefault();
+            if(form && form.email && form.password) {
+                const res = await fetch(`https://deep-linking-psi.vercel.app/signup`, {
+                    headers: {"Content-type": "application/json"},
+                    method: "POST",
+                    body: JSON.stringify({
+                        name: form.name.value.trim(),
+                        email: form.email.value.trim(),
+                        password: form.password.value.trim()
+                    })
+                })
+            }
+
+        } catch(err) {
+            if (err instanceof Error){
+                console.error("Registration failed: ", err)
+            }
+        }
+    }
+ </script>
 </body>
 
 </html>

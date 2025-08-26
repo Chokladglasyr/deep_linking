@@ -1,4 +1,12 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
+
+export interface ITracking extends Document {
+    ip: string;
+    influencer: string;
+    source: string;
+    createdAt: Date;
+
+}
 
 const trackingSchema = new Schema({
   ip: { type: String, required: true },
@@ -7,7 +15,4 @@ const trackingSchema = new Schema({
   createdAt: {type: Date, default: Date.now, expires: 900}
 });
 
-export const Tracking = model<Schema<typeof trackingSchema>>(
-  "Tracking",
-  trackingSchema
-);
+export const Tracking = mongoose.model<ITracking>("Tracking", trackingSchema)

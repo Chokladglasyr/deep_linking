@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { createUser } from "../controllers/userController";
 import path from "path";
 import { trackUser } from "../controllers/tracking";
+import cors from "cors";
 
 dotenv.config();
 
@@ -11,6 +12,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+app.use(cors({
+    origin: ["deep-linking-psi.vercel.app", `http://localhost:${port}`]
+}))
 
 app.get("/", (req: Request, res: Response) => {
   // const clientIp = req.ip || req.socket.remoteAddress;
