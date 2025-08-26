@@ -15,6 +15,8 @@ app.use(express.json());
 app.get("/", (req: Request, res: Response) => {
   // const clientIp = req.ip || req.socket.remoteAddress;
   // console.log("Visitor IP:", clientIp);
+  console.log("hej")
+  console.log(req)
   trackUser(req);
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
 });

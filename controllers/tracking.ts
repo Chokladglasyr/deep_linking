@@ -1,5 +1,6 @@
-import { Tracking } from "../models/tracking";
+
 import { Request } from "express";
+import { Tracking } from "../models/checkIpInterface";
 
 export const trackUser = async (req: Request) => {
   try {

@@ -1,13 +1,17 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface IClientIp extends Document {
-    _id: string;
-    refId: string;
+export interface ITracking extends Document {
+    ip: string;
+    influencer: string;
+    source: string;
+    createdAt: Date;
 
 }
-const clientIpSchema: Schema = new Schema ({
-    _id: {type: String},
-    refId: {type: String},
+const trackingSchema: Schema = new Schema ({
+    ip: {type: String, required:true},
+    influencer: {type: String, required:true},
+    source: {type: String},
+    createdAt: {type: Date, default: Date.now, expires: 900}
 
 })
-export const ClientIp = mongoose.model<IClientIp>("ClientIp", clientIpSchema)
+export const Tracking = mongoose.model<ITracking>("Tracking", trackingSchema)
