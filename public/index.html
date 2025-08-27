@@ -11,9 +11,9 @@
 </head>
 <body>
     <form action="" id="signupForm">
-        <input type="text" id="name" placeholder="Name:">
-        <input type="text" id="email" placeholder="Email:">
-        <input type="password" id="password" placeholder="Password">
+        <input type="text" id="name" placeholder="Name:" required>
+        <input type="text" id="email" placeholder="Email:" required>
+        <input type="password" id="password" placeholder="Password" required>
         <button id="submit" type="submit">Submit</button>
     </form>
 <!-- <script src="../build/"></script> -->
@@ -29,9 +29,9 @@
 
     async function registerUser(e) {
         try {
-            console.log("hej")
+
             if(!validateForm.checkValidity()){
-                console.log("fel")
+                // console.log("fel")
                 return;
             }
             e.preventDefault();
@@ -45,6 +45,8 @@
                         password: form.password.value.trim()
                     })
                 })
+                const data = await res.json()
+                console.log(data)
             }
 
         } catch(err) {
