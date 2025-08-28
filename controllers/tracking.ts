@@ -3,37 +3,23 @@ import { Tracking } from "../models/tracking";
 
 export const trackUser = async (req: Request) => {
   try {
-    const influencer = (req.query.influencer as string) || "direct";
-    const source = (req.query.source as string[]) || "direct";
     const ip = req.ip;
-    console.log(
-      "Tracking visit from IP:",
-      req.ip,
-      "Influencer:",
-      influencer,
-      "Source:",
-      source
-    );
-
-    let existingTracking = await Tracking.findOne({ ip });
+    const influencer = req.query.influencer;
+    const source = req.query.source;
+    const existingTracking = await Tracking.findOne({ ip });
 
     if (!existingTracking) {
-      existingTracking = await Tracking.create({
-        ip,
-        influencer,
-        source,
-      });
-      console.log("Created new tracking entry:", existingTracking);
+      await Tracking.create({ ip, influencer, source });
     } else {
-      console.log("Existing user found:", existingTracking);
-
-      if (influencer && influencer !== "direct") {
-        existingTracking.influencer = influencer;
-        await existingTracking.save();
-        console.log("Updated influencer for existing tracking");
+      if (influencer && influencer !== existingTracking.influencer) {
+        // im lying here
+        existingTracking.influencer = influencer as string;
       }
+      if (source && source !== existingTracking.source) {
+        existingTracking.source = source as string;
+      }
+      await existingTracking.save();
     }
-    return existingTracking;
   } catch (error) {
     console.error(`Error when saving ip-address: ${error}`);
   }

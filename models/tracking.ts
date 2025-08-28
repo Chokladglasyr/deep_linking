@@ -1,18 +1,13 @@
-import mongoose, { model, Schema } from "mongoose";
-
-export interface ITracking extends Document {
-    ip: string;
-    influencer: string;
-    source: string;
-    createdAt: Date;
-
-}
+import { InferSchemaType, model, Schema } from "mongoose";
 
 const trackingSchema = new Schema({
   ip: { type: String, required: true },
-  influencer: { type: String, required: true },
+  influencer: { type: String },
   source: { type: String },
-  createdAt: {type: Date, default: Date.now, expires: 900}
+  createdAt: { type: Date, default: Date.now, expires: 900 },
 });
 
-export const Tracking = mongoose.model<ITracking>("Tracking", trackingSchema)
+export const Tracking = model<InferSchemaType<typeof trackingSchema>>(
+  "Tracking",
+  trackingSchema
+);
