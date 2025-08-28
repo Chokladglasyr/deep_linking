@@ -10,7 +10,8 @@ export const createUser = async (req: Request, res: Response) => {
     if (!existsTracking) {
       const newTracking = new Tracking({
         ip: clientIp,
-        source: req.headers.referer || "direct",
+        influencer: (req.query.influencer as string) || "direct",
+        source: (req.query.source as string[]) || "direct",
       });
       await newTracking.save();
     } else {

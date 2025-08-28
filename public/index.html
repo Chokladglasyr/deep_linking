@@ -29,9 +29,7 @@
 
     async function registerUser(e) {
         try {
-            console.log("hej")
             if(!validateForm.checkValidity()){
-                console.log("fel")
                 return;
             }
             e.preventDefault();
@@ -46,7 +44,7 @@
                     })
                 })
             }
-
+            console.log(message)
         } catch(err) {
             if (err instanceof Error){
                 console.error("Registration failed: ", err)
